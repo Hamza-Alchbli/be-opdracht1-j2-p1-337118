@@ -6,6 +6,7 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.4/tailwind.min.css">
     <link rel="stylesheet" href="<?= URLROOT; ?>/css/style.css">
 </head>
   <body>
@@ -28,7 +29,9 @@
             </tr>
         </tbody>
     </table>
-
+    <!-- button with cool styling and top margin-->
+    <a href="<?= URLROOT; ?>/instructeur/nietGebruiktVoertuigen/<?= $data['instructeaurId'] ?>" class="btn btn-primary mt-4">Add </a>
+    
     <table>
         <thead>
             <th>Id</th>

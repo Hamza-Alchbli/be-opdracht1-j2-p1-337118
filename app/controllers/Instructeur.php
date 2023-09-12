@@ -98,9 +98,6 @@ class Instructeur extends BaseController
                                         <a href='" . URLROOT . "/instructeur/overzichtvoertuigen_wijzig/$voertuig->Id/$InstructeaurId' class='m-4'>
                                             <i class='bi bi-pencil-square'></i>
                                         </a>
-                                        <a href='" . URLROOT . "/instructeur/overzichtvoertuigen_wijzig/$voertuig->Id/$InstructeaurId' class='m-4'>
-                                            <i class='bi bi-plus'></i>
-                                        </a>
 
                                     </td>            
                             </tr>";
@@ -113,7 +110,8 @@ class Instructeur extends BaseController
             'tableRows' => $tableRows,
             'naam'      => $naam,
             'datumInDienst' => $datumInDienst,
-            'aantalSterren' => $aantalSterren
+            'aantalSterren' => $aantalSterren,
+            'instructeaurId' => $InstructeaurId
         ];
 
         $this->view('Instructeur/overzichtVoertuigen', $data);
@@ -140,6 +138,22 @@ class Instructeur extends BaseController
     function voertuigDelete($Id, $InstructeaurId)
     {
         $this->instructeurModel->deleteVoertuig($Id);
+        $this->overzichtVoertuigen($InstructeaurId);
+    }
+
+    function nietGebruiktVoertuigen($InstructeaurId) {
+        $nietGebruiktVoeruigen = $this->instructeurModel->nietGebruiktVoertuig();
+
+        $data = [
+            'title' => 'Niet gebruikte Voertuigen',
+            'result' => $nietGebruiktVoeruigen,
+            'instructeaurId' => $InstructeaurId
+        ];
+
+        $this->view('Instructeur/overzichtNietGebruiktVoertuigen', $data);
+    }
+    function addNietGebruiktVoertuigen($Id, $InstructeaurId) {
+        $this->instructeurModel->addNietGebruiktVoertuigen($Id, $InstructeaurId);
         $this->overzichtVoertuigen($InstructeaurId);
     }
 }

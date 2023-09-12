@@ -106,14 +106,28 @@ class InstructeurModel
         $sql2 = "UPDATE VoertuigInstructeur SET InstructeurId = :instructeur WHERE VoertuigId = $voertuigId";
         $this->db->query($sql2);
         $this->db->bind(':instructeur', $_POST['instructeur']);
-        
+
         return $this->db->resultSet();
     }
-
+    
     function deleteVoertuig($Id)
     {
         $sql = "DELETE FROM Voertuig WHERE Id = $Id";
         $this->db->query($sql);
+        return $this->db->resultSet();
+    }
+    
+    function nietGebruiktVoertuig()
+    {
+        $sql = "SELECT * FROM Voertuig WHERE Id NOT IN (SELECT VoertuigId FROM VoertuigInstructeur);";
+        $this->db->query($sql);
+        return $this->db->resultSet();
+    }
+    function addNietGebruiktVoertuigen($voertuigId, $InstructeaurId) {
+        $sql = "INSERT INTO VoertuigInstructeur (VoertuigId, InstructeurId) VALUES (:voertuigId, :instructeurId)";
+        $this->db->query($sql);
+        $this->db->bind(':voertuigId', $voertuigId);
+        $this->db->bind(':instructeurId', $InstructeaurId);
         return $this->db->resultSet();
     }
 }
