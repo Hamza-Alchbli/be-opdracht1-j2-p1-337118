@@ -45,10 +45,10 @@ class Instructeur extends BaseController
         $this->view('Instructeur/overzichtinstructeur', $data);
     }
 
-    public function overzichtVoertuigen($Id)
+    public function overzichtVoertuigen($InstructeaurId)
     {
 
-        $instructeurInfo = $this->instructeurModel->getInstructeurById($Id);
+        $instructeurInfo = $this->instructeurModel->getInstructeurById($InstructeaurId);
 
         // var_dump($instructeurInfo);
         $naam = $instructeurInfo->Voornaam . " " . $instructeurInfo->Tussenvoegsel . " " . $instructeurInfo->Achternaam;
@@ -58,7 +58,7 @@ class Instructeur extends BaseController
         /**
          * We laten de model alle gegevens ophalen uit de database
          */
-        $result = $this->instructeurModel->getToegewezenVoertuigen($Id);
+        $result = $this->instructeurModel->getToegewezenVoertuigen($InstructeaurId);
 
 
         $tableRows = "";
@@ -90,10 +90,13 @@ class Instructeur extends BaseController
                                     <td>$voertuig->Kenteken</td>
                                     <td>$date_formatted</td>
                                     <td>$voertuig->Brandstof</td>
-                                    <td>$voertuig->RijbewijsCategorie</td>            
-                                    <td>
-                                        <a href='" . URLROOT . "/instructeur/overzichtvoertuigen/$voertuig->Id'>
-                                            <i class='bi bi-car-front'></i>
+                                    <td>$voertuig->RijbewijsCategorie</td>  
+                                    <td class='d-flex justify-content-between'>
+                                        <a href='" . URLROOT . "/instructeur/voertuigDelete/$voertuig->Id/$InstructeaurId'>
+                                            <i class='bi bi-trash'></i>
+                                        </a>
+                                        <a href='" . URLROOT . "/instructeur/overzichtvoertuigen_wijzig/$voertuig->Id/$InstructeaurId'>
+                                            <i class='bi bi-pencil-square'></i>
                                         </a>
                                     </td>            
                             </tr>";
@@ -110,5 +113,29 @@ class Instructeur extends BaseController
         ];
 
         $this->view('Instructeur/overzichtVoertuigen', $data);
+    }
+    function overzichtvoertuigen_wijzig($Id, $InstructeaurId)
+    {
+        $VoertuigInfo = $this->instructeurModel->getToegewezenVoertuig($InstructeaurId, $Id);
+        $result = $this->instructeurModel->getInstructeurs();
+        $data = [
+            'title' => 'Wijzig voertuig',
+            'voertuigId' => $Id,
+            'instructeaurId' => $InstructeaurId,
+            'voertuigInfo' => $VoertuigInfo,
+            'instructeurs' => $result,
+        ];
+        $this->view('Instructeur/overzichtvoertuigen_wijzig', $data);
+    }
+    function overzichtvoertuigen_wijzig_save($Id, $InstructeaurId)
+    {
+        $this->instructeurModel->updateVoertuig($Id);
+        $this->overzichtVoertuigen($InstructeaurId);
+    }
+    // function to delete voertuig
+    function voertuigDelete($Id, $InstructeaurId)
+    {
+        $this->instructeurModel->deleteVoertuig($Id);
+        $this->overzichtVoertuigen($InstructeaurId);
     }
 }
