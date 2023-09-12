@@ -33,9 +33,14 @@
                 <label for="kenteken" class="block text-gray-700 font-bold mb-2">Kenteken:</label>
                 <input type="text" id="kenteken" name="kenteken" class="w-full p-2 border border-gray-300 rounded" value="<?= $data['voertuigInfo'][0]->Kenteken ?>">
             </div>
+            <!-- make a date field that can not change -->
+            <div class="mb-4">
+                <label for="bouwjaar" class="block text-gray-700 font-bold mb-2">Bouwjaar:</label>
+                <input type="date" id="bouwjaar" name="bouwjaar" class="w-full p-2 border border-gray-300 rounded" value="<?= $data['voertuigInfo'][0]->Bouwjaar ?>" disabled>
+            </div>
             <select name="instructeur" id="instructeur" class="w-full p-2 border border-gray-300 rounded mb-4">
                 <?php foreach ($data['instructeurs'] as $instructeur) : ?>
-                    <option value="<?= $instructeur->Id ?>" ><?= $instructeur->Voornaam . ' ' . $instructeur->Tussenvoegsel . ' ' . $instructeur->Achternaam ?></option>
+                    <option value="<?= $instructeur->Id ?>"><?= $instructeur->Voornaam . ' ' . $instructeur->Tussenvoegsel . ' ' . $instructeur->Achternaam ?></option>
                 <?php endforeach; ?>
             </select>
             <div class="flex justify-between">

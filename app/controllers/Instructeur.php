@@ -91,13 +91,17 @@ class Instructeur extends BaseController
                                     <td>$date_formatted</td>
                                     <td>$voertuig->Brandstof</td>
                                     <td>$voertuig->RijbewijsCategorie</td>  
-                                    <td class='d-flex justify-content-between'>
-                                        <a href='" . URLROOT . "/instructeur/voertuigDelete/$voertuig->Id/$InstructeaurId'>
+                                    <td class='d-flex justify-content-between gap-8'>
+                                        <a href='" . URLROOT . "/instructeur/voertuigDelete/$voertuig->Id/$InstructeaurId' class='m-4'>
                                             <i class='bi bi-trash'></i>
                                         </a>
-                                        <a href='" . URLROOT . "/instructeur/overzichtvoertuigen_wijzig/$voertuig->Id/$InstructeaurId'>
+                                        <a href='" . URLROOT . "/instructeur/overzichtvoertuigen_wijzig/$voertuig->Id/$InstructeaurId' class='m-4'>
                                             <i class='bi bi-pencil-square'></i>
                                         </a>
+                                        <a href='" . URLROOT . "/instructeur/overzichtvoertuigen_wijzig/$voertuig->Id/$InstructeaurId' class='m-4'>
+                                            <i class='bi bi-plus'></i>
+                                        </a>
+
                                     </td>            
                             </tr>";
             }
