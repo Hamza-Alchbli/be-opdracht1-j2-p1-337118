@@ -30,6 +30,7 @@
         </tbody>
     </table>
     <!-- button with cool styling and top margin-->
+    <a href="<?= URLROOT; ?>/instructeur/overzichtinstructeur" class="btn btn-primary mt-4">Back </a>
     <a href="<?= URLROOT; ?>/instructeur/nietGebruiktVoertuigen/<?= $data['instructeaurId'] ?>" class="btn btn-primary mt-4">Add </a>
     
     <table>

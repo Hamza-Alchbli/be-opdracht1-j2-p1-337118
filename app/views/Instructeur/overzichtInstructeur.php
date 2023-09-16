@@ -11,8 +11,9 @@
     <title>Overzicht Instructeurs</title>
 </head>
 <body>
-    <u><?= $data['title']; ?></u>
-
+    <u><?= $data['title']; ?></u><br>
+    <!-- button to take me home  -->
+    <a href="<?= URLROOT; ?>" class="btn btn-primary">Home</a>
     <table>
         <thead>
             <th>Voornaam</th>

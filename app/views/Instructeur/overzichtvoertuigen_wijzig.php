@@ -13,7 +13,7 @@
 </head>
 
 <body class="bg-gray-100 p-6">
-    <!-- <?php var_dump($data['voertuigInfo']) ?> -->
+    <!-- <?php var_dump($data) ?> -->
     <div class="max-w-md mx-auto bg-white rounded p-6">
         <h2 class="text-xl mb-4">Update Voertuig info</h2>
         <form action="<?= URLROOT; ?>/instructeur/overzichtvoertuigen_wijzig_save/<?= $data['voertuigId'] ?>/<?= $data['instructeaurId'] ?>" method="POST">
@@ -21,6 +21,13 @@
                 <label for="type" class="block text-gray-700 font-bold mb-2">Type:</label>
                 <input type="text" id="type" name="type" class="w-full p-2 border border-gray-300 rounded" value="<?= $data['voertuigInfo'][0]->Type ?>">
             </div>
+            <label for="typeVoertuig" class="block text-gray-700 font-bold mb-2">TypeVoertuig:</label>
+            <select name="typeVoertuig" id="typeVoertuig" class="w-full p-2 border border-gray-300 rounded mb-4">
+                <?php foreach ($data['typeVoertuigen'] as $typeVoertuig) : ?>
+                    <option value="<?= $typeVoertuig->Id ?>" <?= $typeVoertuig->Id == $data['voertuigInfo'][0]->TypeVoertuigId ? "selected" : "" ?>><?= $typeVoertuig->TypeVoertuig ?></option>
+                <?php endforeach; ?>
+            </select>
+
             <div class="mb-4">
                 <label for="brandstof" class="block text-gray-700 font-bold mb-2">Brandstof:</label>
                 <select name="brandstof" id="brandstof" class="w-full p-2 border border-gray-300 rounded">
@@ -38,11 +45,15 @@
                 <label for="bouwjaar" class="block text-gray-700 font-bold mb-2">Bouwjaar:</label>
                 <input type="date" id="bouwjaar" name="bouwjaar" class="w-full p-2 border border-gray-300 rounded" value="<?= $data['voertuigInfo'][0]->Bouwjaar ?>" disabled>
             </div>
-            <select name="instructeur" id="instructeur" class="w-full p-2 border border-gray-300 rounded mb-4">
-                <?php foreach ($data['instructeurs'] as $instructeur) : ?>
-                    <option value="<?= $instructeur->Id ?>"><?= $instructeur->Voornaam . ' ' . $instructeur->Tussenvoegsel . ' ' . $instructeur->Achternaam ?></option>
-                <?php endforeach; ?>
-            </select>
+            <div class="mb-4">
+                <label for="instructeur" class="block text-gray-700 font-bold mb-2">Instructeur:</label>
+                <select required name="instructeur" id="instructeur" class="w-full p-2 border border-gray-300 rounded mb-4">
+                    <?php foreach ($data['instructeurs'] as $instructeur) : ?>
+                        <option value="<?= $instructeur->Id ?>" <?= $instructeur->Id == $data['instructeaurId'] ? "selected" : "" ?>><?= $instructeur->Voornaam . ' ' . $instructeur->Tussenvoegsel . ' ' . $instructeur->Achternaam ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
             <div class="flex justify-between">
                 <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">Save</button>
                 <button type="button" class="px-4 py-2 bg-gray-500 text-white rounded"><a href="<?= URLROOT; ?>/instructeur/overzichtvoertuigen/<?= $data['instructeaurId'] ?>">Cancel</a></button>

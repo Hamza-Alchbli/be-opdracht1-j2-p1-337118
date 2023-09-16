@@ -32,6 +32,7 @@ class InstructeurModel
                             ,VOER.Kenteken
                             ,VOER.Bouwjaar
                             ,VOER.Brandstof
+                            ,TypeVoertuigId
                             ,TYVO.TypeVoertuig
                             ,TYVO.RijbewijsCategorie
 
@@ -52,14 +53,16 @@ class InstructeurModel
         $this->db->query($sql);
         return $this->db->resultSet();
     }
-    function getToegewezenVoertuig($Id, $InstructeurId)
+    function getToegewezenVoertuig($voertuigId, $InstructeurId)
     {
         $sql = "SELECT      VOER.Id
         ,VOER.Type
         ,VOER.Kenteken
         ,VOER.Bouwjaar
         ,VOER.Brandstof
+        ,TypeVoertuigId
         ,TYVO.TypeVoertuig
+        ,TYVO.Id
         ,TYVO.RijbewijsCategorie
         FROM        Voertuig    AS  VOER
 
@@ -71,9 +74,28 @@ class InstructeurModel
 
         ON          VOIN.VoertuigId = VOER.Id
 
-        WHERE       VOIN.InstructeurId = $Id AND VOER.Id = $InstructeurId
+        WHERE       VOIN.InstructeurId = $InstructeurId AND VOER.Id = $voertuigId";
 
-        ORDER BY    TYVO.RijbewijsCategorie DESC";
+        $this->db->query($sql);
+        return $this->db->resultSet();
+    }
+    function getToegewezenVoertuigNoInstructeur($voertuigId) {
+        $sql = "SELECT      VOER.Id
+        ,VOER.Type
+        ,VOER.Kenteken
+        ,VOER.Bouwjaar
+        ,VOER.Brandstof
+        ,TypeVoertuigId
+        ,TYVO.TypeVoertuig
+        ,TYVO.Id
+        ,TYVO.RijbewijsCategorie
+        FROM        Voertuig    AS  VOER
+
+        INNER JOIN  TypeVoertuig AS TYVO
+
+        ON          TYVO.Id = VOER.TypeVoertuigId
+
+        WHERE       VOER.Id = $voertuigId";
 
         $this->db->query($sql);
         return $this->db->resultSet();
@@ -93,37 +115,70 @@ class InstructeurModel
         return $this->db->single();
     }
 
-    function updateVoertuig($voertuigId)
-    {
-        $sql = "UPDATE Voertuig SET Type = :type, Brandstof = :brandstof, Kenteken = :kenteken WHERE 
-                voertuigId = $voertuigId ";
+    function typeVoertuigen() {
+        $sql = "SELECT Id
+                      ,TypeVoertuig
+                      ,RijbewijsCategorie
+                FROM  TypeVoertuig
+                ORDER BY RijbewijsCategorie DESC";
+
         $this->db->query($sql);
-        $this->db->bind(':type', $_POST['type']);
-        $this->db->bind(':brandstof', $_POST['brandstof']);
-        $this->db->bind(':kenteken', $_POST['kenteken']);
-        
-
-        $sql2 = "UPDATE VoertuigInstructeur SET InstructeurId = :instructeur WHERE VoertuigId = $voertuigId";
-        $this->db->query($sql2);
-        $this->db->bind(':instructeur', $_POST['instructeur']);
-
         return $this->db->resultSet();
     }
-    
+
+    function updateVoertuig($voertuigId)
+    {
+        try {
+            $sql = "UPDATE Voertuig SET Type = :type, Brandstof = :brandstof, Kenteken = :kenteken, TypeVoertuigId = :TypeVoertuigId WHERE 
+            Id = $voertuigId ";
+            $this->db->query($sql);
+            $this->db->bind(':type', $_POST['type']);
+            $this->db->bind(':brandstof', $_POST['brandstof']);
+            $this->db->bind(':kenteken', $_POST['kenteken']);
+            $this->db->bind(':TypeVoertuigId', $_POST['typeVoertuig']);
+            return $this->db->resultSet();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+        try {
+            $sql = "UPDATE VoertuigInstructeur SET InstructeurId = :instructeur WHERE VoertuigId = $voertuigId";
+            $this->db->query($sql);
+            $this->db->bind(':instructeur', $_POST['instructeur']);
+            return $this->db->resultSet();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+       
+    }
+
+    function updateInstructeur($voertuigId)
+    {
+        try {
+            $sql = "UPDATE VoertuigInstructeur SET InstructeurId = :instructeur WHERE VoertuigId = $voertuigId";
+            $this->db->query($sql);
+            $this->db->bind(':instructeur', $_POST['instructeur']);
+
+            return $this->db->resultSet();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
     function deleteVoertuig($Id)
     {
         $sql = "DELETE FROM Voertuig WHERE Id = $Id";
         $this->db->query($sql);
         return $this->db->resultSet();
     }
-    
+
     function nietGebruiktVoertuig()
     {
         $sql = "SELECT * FROM Voertuig WHERE Id NOT IN (SELECT VoertuigId FROM VoertuigInstructeur);";
         $this->db->query($sql);
         return $this->db->resultSet();
     }
-    function addNietGebruiktVoertuigen($voertuigId, $InstructeaurId) {
+    function addNietGebruiktVoertuigen($voertuigId, $InstructeaurId)
+    {
         $sql = "INSERT INTO VoertuigInstructeur (VoertuigId, InstructeurId) VALUES (:voertuigId, :instructeurId)";
         $this->db->query($sql);
         $this->db->bind(':voertuigId', $voertuigId);

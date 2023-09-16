@@ -116,25 +116,31 @@ class Instructeur extends BaseController
 
         $this->view('Instructeur/overzichtVoertuigen', $data);
     }
-    function overzichtvoertuigen_wijzig($Id, $InstructeaurId)
+    function overzichtvoertuigen_wijzig($voertuigId, $InstructeaurId)
     {
-        $VoertuigInfo = $this->instructeurModel->getToegewezenVoertuig($InstructeaurId, $Id);
-        $result = $this->instructeurModel->getInstructeurs();
+        $VoertuigInfo = $this->instructeurModel->getToegewezenVoertuig($voertuigId, $InstructeaurId);
+        if (empty($VoertuigInfo)) {
+            $VoertuigInfo =  $this->instructeurModel->getToegewezenVoertuigNoInstructeur($voertuigId);
+        }
+        $instructeurs = $this->instructeurModel->getInstructeurs();
+        $typeVoertuigen = $this->instructeurModel->typeVoertuigen();
         $data = [
             'title' => 'Wijzig voertuig',
-            'voertuigId' => $Id,
+            'voertuigId' => $voertuigId,
             'instructeaurId' => $InstructeaurId,
             'voertuigInfo' => $VoertuigInfo,
-            'instructeurs' => $result,
+            'instructeurs' => $instructeurs,
+            'typeVoertuigen' => $typeVoertuigen
         ];
         $this->view('Instructeur/overzichtvoertuigen_wijzig', $data);
     }
-    function overzichtvoertuigen_wijzig_save($Id, $InstructeaurId)
+    function overzichtvoertuigen_wijzig_save($voertuigId, $InstructeaurId)
     {
-        $this->instructeurModel->updateVoertuig($Id);
+        $this->instructeurModel->updateVoertuig($voertuigId);
+        $this->instructeurModel->updateInstructeur($voertuigId);
         $this->overzichtVoertuigen($InstructeaurId);
     }
-    // function to delete voertuig
+
     function voertuigDelete($Id, $InstructeaurId)
     {
         $this->instructeurModel->deleteVoertuig($Id);
@@ -143,11 +149,19 @@ class Instructeur extends BaseController
 
     function nietGebruiktVoertuigen($InstructeaurId) {
         $nietGebruiktVoeruigen = $this->instructeurModel->nietGebruiktVoertuig();
+        $instructeurInfo = $this->instructeurModel->getInstructeurById($InstructeaurId);
 
+        // var_dump($instructeurInfo);
+        $naam = $instructeurInfo->Voornaam . " " . $instructeurInfo->Tussenvoegsel . " " . $instructeurInfo->Achternaam;
+        $datumInDienst = $instructeurInfo->DatumInDienst;
+        $aantalSterren = $instructeurInfo->AantalSterren;
         $data = [
             'title' => 'Niet gebruikte Voertuigen',
             'result' => $nietGebruiktVoeruigen,
-            'instructeaurId' => $InstructeaurId
+            'instructeaurId' => $InstructeaurId,
+            'naam'      => $naam,
+            'datumInDienst' => $datumInDienst,
+            'aantalSterren' => $aantalSterren,
         ];
 
         $this->view('Instructeur/overzichtNietGebruiktVoertuigen', $data);
