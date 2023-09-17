@@ -1,1 +1,3 @@
-<script>alert('Hoi');</script>
+let n = 1;
+
+console.log(n);
