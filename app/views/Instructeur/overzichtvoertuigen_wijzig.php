@@ -14,6 +14,7 @@
 
 <body class="bg-gray-100 p-6">
     <!-- <?php var_dump($data) ?> -->
+    
     <div class="max-w-md mx-auto bg-white rounded p-6">
         <h2 class="text-xl mb-4">Update Voertuig info</h2>
         <form action="<?= URLROOT; ?>/instructeur/overzichtvoertuigen_wijzig_save/<?= $data['voertuigId'] ?>/<?= $data['instructeaurId'] ?>" method="POST">
