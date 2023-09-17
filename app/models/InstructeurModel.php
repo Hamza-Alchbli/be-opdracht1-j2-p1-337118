@@ -166,8 +166,10 @@ class InstructeurModel
 
     function deleteVoertuig($Id)
     {
-        $sql = "DELETE FROM Voertuig WHERE Id = $Id";
-        $this->db->query($sql);
+        $sqlVoeruit = "DELETE FROM Voertuig WHERE Id = $Id";
+        $sqlVoerIn = "DELETE FROM VoertuigInstructeur WHERE VoertuigId = $Id";
+        $this->db->query($sqlVoeruit);
+        $this->db->query($sqlVoerIn);
         return $this->db->resultSet();
     }
 
