@@ -72,7 +72,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         'Leroy',
         '',
         'Boerhaven',
@@ -84,7 +84,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         'Yoeri',
         'van',
         'Veen',
@@ -96,7 +96,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         'Bert',
         'van',
         'Sali',
@@ -108,7 +108,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         'Mohammed',
         'El',
         'Yassidi',
@@ -167,7 +167,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         'Vrachtwagen',
         'C',
         1,
@@ -175,8 +175,8 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-('Bus', 'D', 1, NULL, SYSDATE(6), SYSDATE(6)),
-(
+    ('Bus', 'D', 1, NULL, SYSDATE(6), SYSDATE(6)),
+    (
         'Bromfiets',
         'AM',
         1,
@@ -241,7 +241,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         'TR-24-OP',
         'DAF',
         '2019-05-23',
@@ -252,7 +252,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         'TH-78-KL',
         'Mercedes',
         '2023-01-01',
@@ -263,7 +263,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         '90-KL-TR',
         'Fiat 500',
         '2021-09-12',
@@ -274,7 +274,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         '34-TK-LP',
         'Scania',
         '2015-03-13',
@@ -285,7 +285,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         'YY-OP-78',
         'BMW M5',
         '2022-05-13',
@@ -296,7 +296,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         'UU-HH-JK',
         'M.A.N',
         '2017-12-03',
@@ -307,7 +307,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         'ST-FZ-28',
         'Citroën',
         '2018-01-20',
@@ -318,7 +318,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         '123-FR-T',
         'Piaggio ZIP',
         '2021-02-01',
@@ -329,7 +329,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         'DRS-52-P',
         'Vespa',
         '2022-03-21',
@@ -340,7 +340,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         'STP-12-U',
         'Vespa',
         '2022-07-02',
@@ -351,7 +351,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         '45-SD-23',
         'Renault',
         '2023-01-01',
@@ -414,7 +414,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         3,
         1,
         '2021-09-26',
@@ -423,7 +423,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         9,
         1,
         '2021-09-27',
@@ -432,7 +432,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         3,
         4,
         '2022-08-01',
@@ -441,7 +441,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         5,
         1,
         '2019-08-30',
@@ -450,7 +450,7 @@ VALUES
         SYSDATE(6),
         SYSDATE(6)
     ),
-(
+    (
         10,
         5,
         '2020-02-02',
