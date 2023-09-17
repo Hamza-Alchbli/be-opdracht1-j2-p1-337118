@@ -14,6 +14,9 @@
     <u><?= $data['title']; ?></u><br>
     <!-- button to take me home  -->
     <a href="<?= URLROOT; ?>" class="btn btn-primary">Home</a>
+    <!-- aantal instructeurs -->
+    <p>Er zijn <?= $data['totalInstructeurs']; ?> instructeurs</p>
+
     <table>
         <thead>
             <th>Voornaam</th>
