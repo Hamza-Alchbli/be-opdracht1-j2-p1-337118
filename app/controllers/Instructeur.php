@@ -39,7 +39,8 @@ class Instructeur extends BaseController
 
         $data = [
             'title' => 'Instructeurs in dienst',
-            'rows' => $rows
+            'rows' => $rows,
+            'totalInstructeurs' => count($result),
         ];
 
         $this->view('Instructeur/overzichtinstructeur', $data);
