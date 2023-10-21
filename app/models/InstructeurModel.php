@@ -121,7 +121,6 @@ class InstructeurModel
                       ,RijbewijsCategorie
                 FROM  TypeVoertuig
                 ORDER BY RijbewijsCategorie DESC";
-
         $this->db->query($sql);
         return $this->db->resultSet();
     }
@@ -140,14 +139,14 @@ class InstructeurModel
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
-        try {
-            $sql = "UPDATE VoertuigInstructeur SET InstructeurId = :instructeur WHERE VoertuigId = $voertuigId";
-            $this->db->query($sql);
-            $this->db->bind(':instructeur', $_POST['instructeur']);
-            return $this->db->resultSet();
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
-        }
+        // try {
+        //     $sql = "UPDATE VoertuigInstructeur SET InstructeurId = :instructeur WHERE VoertuigId = $voertuigId";
+        //     $this->db->query($sql);
+        //     $this->db->bind(':instructeur', $_POST['instructeur']);
+        //     return $this->db->resultSet();
+        // } catch (Exception $e) {
+        //     echo "Error: " . $e->getMessage();
+        // }
        
     }
 

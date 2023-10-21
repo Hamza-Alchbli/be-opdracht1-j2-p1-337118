@@ -14,6 +14,7 @@
 <body>
 
     <div class="container mx-auto p-4">
+
     <h3><u><?= $data['title']; ?></u></h3>
         <table>
             <tbody>

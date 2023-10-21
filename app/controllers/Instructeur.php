@@ -46,7 +46,7 @@ class Instructeur extends BaseController
         $this->view('Instructeur/overzichtinstructeur', $data);
     }
 
-    public function overzichtVoertuigen($InstructeaurId)
+    public function overzichtVoertuigen($InstructeaurId,$message = '')
     {
 
         $instructeurInfo = $this->instructeurModel->getInstructeurById($InstructeaurId);
@@ -112,7 +112,8 @@ class Instructeur extends BaseController
             'naam'      => $naam,
             'datumInDienst' => $datumInDienst,
             'aantalSterren' => $aantalSterren,
-            'instructeaurId' => $InstructeaurId
+            'instructeaurId' => $InstructeaurId,
+            'message' => $message
         ];
 
         $this->view('Instructeur/overzichtVoertuigen', $data);
@@ -145,7 +146,13 @@ class Instructeur extends BaseController
     function voertuigDelete($Id, $InstructeaurId)
     {
         $this->instructeurModel->deleteVoertuig($Id);
-        $this->overzichtVoertuigen($InstructeaurId);
+        // show message and wait for 2 seconds
+        echo "<div class='alert alert-success' role='alert'>
+                Voertuig is verwijderd
+              </div>";
+
+        header("refresh:2;url=" . URLROOT . "/instructeur/overzichtvoertuigen/$InstructeaurId");
+        // $this->overzichtVoertuigen($InstructeaurId, 'Het voertuig is verwijderd');
     }
 
     function nietGebruiktVoertuigen($InstructeaurId) {
